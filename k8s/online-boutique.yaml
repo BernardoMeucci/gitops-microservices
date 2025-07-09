@@ -259,6 +259,7 @@ metadata:
   labels:
     app: frontend
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: frontend
@@ -679,7 +680,7 @@ spec:
   selector:
     matchLabels:
       app: loadgenerator
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
