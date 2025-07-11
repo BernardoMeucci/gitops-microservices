@@ -23,21 +23,10 @@ Executar o conjunto de microserviços **Online Boutique** em um cluster Kubernet
 | Tecnologia / Conceito | Propósito no Projeto |
 | :-------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Kubernetes** | Plataforma de orquestração de contêineres que serviu como base para rodar a aplicação em um ambiente local via **Docker Desktop**.                  |
-| **GitOps** | Metodologia de operações onde o repositório Git é a **fonte única da verdade**, garantindo um processo de deploy auditável e previsível.       |
+| **GitOps** | Metodologia de operações onde o repositório Git é a **fonte única da verdade**, garantindo um processo de deploy auditável e previsível.        |
 | **ArgoCD** | Ferramenta de GitOps que atua como um operador no cluster, garantindo que o estado da aplicação seja um reflexo fiel do que está definido no Git. |
-| **Microserviços** | Arquitetura da aplicação de exemplo ("Online Boutique"), dividida em múltiplos serviços menores e independentes e conteinerizados.                       |
+| **Microserviços** | Arquitetura da aplicação de exemplo ("Online Boutique"), dividida em múltiplos serviços independentes e conteinerizados.                       |
 | **Docker** | Utilizado como o motor de contêineres que executa as imagens da aplicação dentro dos pods do Kubernetes.                                       |
-
----
-
-## 📂 Estrutura do Repositório
-
-/
-└── k8s/
-└── online-boutique.yaml
-
-
-- **/k8s/online-boutique.yaml**: Manifesto "tudo-em-um" que descreve todos os Deployments, Services e outros recursos Kubernetes necessários para a execução completa da aplicação.
 
 ---
 
@@ -52,7 +41,7 @@ Executar o conjunto de microserviços **Online Boutique** em um cluster Kubernet
 
 2.  **Criação da Fonte da Verdade:**
     - Este repositório Git foi criado para hospedar os manifestos da aplicação.
-    - O manifesto da aplicação "Online Boutique", do projeto `microservices-demo` do Google, foi adicionado à pasta `k8s/`.
+    - O manifesto da aplicação "Online Boutique" foi adicionado à pasta `k8s/`.
 
 3.  **Instalação do ArgoCD:**
     - O ArgoCD foi instalado no cluster através do comando `kubectl apply`.
@@ -63,10 +52,20 @@ Executar o conjunto de microserviços **Online Boutique** em um cluster Kubernet
     - Ao estabelecer a conexão, o ArgoCD iniciou a sincronização automática, lendo o manifesto `online-boutique.yaml` e comandando o Kubernetes para criar todos os microserviços da aplicação.
 
 5.  **Escalabilidade (Etapa Opcional):**
-    - Para demonstrar o poder do GitOps, o `Deployment` do `frontend` foi customizado e escalado para **3 réplicas**.
-    - A mudança foi feita no arquivo YAML, enviada ao Git, e o ArgoCD automaticamente ajustou o número de pods no cluster, comprovando a eficiência do processo.
+    - O `Deployment` do `frontend` foi customizado e escalado para **3 réplicas**.
+    - A mudança foi feita no arquivo YAML, enviada ao Git, e o ArgoCD automaticamente ajustou o número de pods no cluster.
 
 </details>
+
+---
+
+## 🖼️ Telas do Projeto
+
+| ArgoCD: Tela de Login | ArgoCD: Aplicação Sincronizada |
+| :---: | :---: |
+| [cite_start]![Tela de Login do ArgoCD](docs/images/argocd-login.jpg) [cite: 3] | ![Aplicação Sincronizada no ArgoCD](docs/images/argocd-app-synced.png) |
+| **ArgoCD: Visão das 3 Réplicas** | **Aplicação Online Boutique em Execução** |
+| [cite_start]![Réplicas do Frontend no ArgoCD](docs/images/argocd-replicas-view.png) [cite: 2] | [cite_start]![Frontend da Loja Online](docs/images/online-boutique-frontend.jpg) [cite: 1] |
 
 ---
 
