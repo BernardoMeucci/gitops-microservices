@@ -35,43 +35,50 @@ Executar o conjunto de microserviços **Online Boutique** em um cluster Kubernet
 <details>
 <summary><strong>Clique para ver o passo a passo da execução do projeto</strong></summary>
 
-1.  **Configuração do Ambiente:**
-    - Um cluster Kubernetes foi inicializado localmente utilizando o **Docker Desktop**.
-    - O `kubectl` foi configurado para se comunicar com o cluster.
+### 1. Configuração do Ambiente
+   - Um cluster Kubernetes foi inicializado localmente utilizando o **Docker Desktop**.
+   - O `kubectl` foi configurado para se comunicar com o cluster.
 
-2.  **Criação da Fonte da Verdade:**
-    - Este repositório Git foi criado para hospedar os manifestos da aplicação.
-    - O manifesto da aplicação "Online Boutique" foi adicionado à pasta `k8s/`.
+### 2. Criação da Fonte da Verdade
+   - Este repositório Git foi criado para hospedar os manifestos da aplicação.
+   - O manifesto da aplicação "Online Boutique" foi adicionado à pasta `k8s/`.
 
-3.  **Instalação do ArgoCD:**
-    - O ArgoCD foi instalado no cluster através do comando `kubectl apply`.
-    - O acesso à sua interface gráfica foi liberado localmente via `port-forward`.
+### 3. Instalação e Configuração do ArgoCD
+   - O ArgoCD foi instalado no cluster através do comando `kubectl apply`.
+   - O acesso à sua interface gráfica foi liberado localmente via `port-forward`, disponibilizando a tela de login.
 
-4.  **Deploy Automatizado via GitOps:**
-    - Um "App" foi criado no ArgoCD, conectando este repositório ao cluster local.
-    - Ao estabelecer a conexão, o ArgoCD iniciou a sincronização automática, lendo o manifesto `online-boutique.yaml` e comandando o Kubernetes para criar todos os microserviços da aplicação.
+<p align="center">
+  <img src="imagens/argocd-login.jpg" alt="Tela de Login do ArgoCD" width="600"/>
+</p>
 
-5.  **Escalabilidade (Etapa Opcional):**
-    - O `Deployment` do `frontend` foi customizado e escalado para **3 réplicas**.
-    - A mudança foi feita no arquivo YAML, enviada ao Git, e o ArgoCD automaticamente ajustou o número de pods no cluster.
+### 4. Deploy Automatizado via GitOps
+   - Um "App" foi criado no ArgoCD, conectando este repositório ao cluster local. A imagem abaixo mostra os parâmetros exatos utilizados para esta configuração.
+
+<p align="center">
+  <img src="imagens/argocd-app-details.png" alt="Detalhes da Aplicação no ArgoCD" width="700"/>
+</p>
+
+   - Ao estabelecer a conexão, o ArgoCD iniciou a sincronização automática, resultando no status `Healthy` e `Synced`, como visto no card da aplicação:
+
+<p align="center">
+  <img src="imagens/argocd-app-synced.png" alt="Aplicação Sincronizada no ArgoCD" width="400"/>
+</p>
+
+### 5. Escalabilidade (Etapa Opcional)
+   - Para demonstrar o poder do GitOps, o `Deployment` do `frontend` foi customizado e escalado para **3 réplicas**.
+   - A mudança foi feita no arquivo YAML, enviada ao Git, e o ArgoCD automaticamente ajustou o número de pods no cluster, como pode ser visto na árvore de componentes.
+
+<p align="center">
+  <img src="imagens/argocd-replicas-view.png" alt="Réplicas do Frontend no ArgoCD" width="700"/>
+</p>
 
 </details>
 
 ---
 
-## 🖼️ Telas do Projeto
-
-| ArgoCD: Tela de Login | ArgoCD: Aplicação Sincronizada |
-| :---: | :---: |
-| [cite_start]![Tela de Login do ArgoCD](docs/images/argocd-login.jpg) [cite: 3] | ![Aplicação Sincronizada no ArgoCD](docs/images/argocd-app-synced.png) |
-| **ArgoCD: Visão das 3 Réplicas** | **Aplicação Online Boutique em Execução** |
-| [cite_start]![Réplicas do Frontend no ArgoCD](docs/images/argocd-replicas-view.png) [cite: 2] | [cite_start]![Frontend da Loja Online](docs/images/online-boutique-frontend.jpg) [cite: 1] |
-
----
-
 ## 🖥️ Como Visualizar o Resultado
 
-Com o ambiente em execução, a aplicação pode ser acessada da seguinte forma:
+Com o ambiente em execução, a aplicação final pode ser acessada da seguinte forma:
 
 1.  **Ativar o túnel de acesso para a aplicação:**
     ```bash
@@ -80,3 +87,7 @@ Com o ambiente em execução, a aplicação pode ser acessada da seguinte forma:
 
 2.  **Acessar a loja online no navegador:**
     - URL: `http://localhost:8081`
+
+<p align="center">
+  <img src="imagens/online-boutique-frontend.jpg" alt="Frontend da Loja Online" width="700"/>
+</p>
